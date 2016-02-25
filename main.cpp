@@ -1,16 +1,26 @@
 #include <stdio.h>    /* printf, fgets */
 #include <stdlib.h>   /* atoi */
+#include <string.h>   /* strlen */
+#include <locale>     /* std::locale, std::toupper */
 
 int main(int argc, char const *argv[])
 {
-    char char2num[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    if(argc != 4) {
+        printf("Error Reading Program Arguments.\n");
+        exit (EXIT_FAILURE);
+    }
 
-    int i;
-    char buffer[256];
-    printf ("Enter a number: ");
-    fgets (buffer, 256, stdin);
-    i = atoi (buffer);
-    printf ("The value entered is %d. Its double is %d.\n",i,i*2);
+    int size = (int)strlen(argv[1]);
+    std::locale loc;
+
+    int cipherNum[size];
+
+    printf("{ ");
+    for(int i = 0; i < size; i++) {
+        cipherNum[i] = std::toupper(argv[1][i],loc);
+        printf("%d ",cipherNum[i]);
+    }
+    printf("}\n\n");
 
     return 0;
 }
