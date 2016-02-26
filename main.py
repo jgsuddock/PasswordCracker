@@ -3,9 +3,11 @@
 #
 #    Project Name:  Mini-Project 2
 #
-# Project Descrip:  
-#                             Encryption: Ek(m) = m + K mod 26
-#                             Decryption: Ek(m) = m - K mod 26
+# Project Descrip:  This project is designed to brute force crack a password
+#                        for a given ciphertext knowing the key length and
+#                        first word length. It is using Vigenere Cipher to 
+#                        decrypt the ciphertext.
+#                             Vigenere Cipher Decryption: Ek(m) = m - K mod 26
 #
 #        Filename:  main.py
 #
@@ -37,26 +39,24 @@ ndict = {0: 'A', 1: 'B', 2: 'C', 3: 'D', 4: 'E', 5: 'F', 6: 'G', 7: 'H', 8: 'I',
 		10: 'K', 11: 'L', 12: 'M', 13: 'N', 14: 'O', 15: 'P', 16: 'Q', 17: 'R', 18: 'S',
 		19: 'T', 20: 'U', 21: 'V', 22: 'W', 23: 'X', 24: 'Y', 25: 'Z'};
 
-wdict = []
+
 # Initialize dictionary lists (index by length)
+wdict = []
 for i in range(0,30):
 	wdict.append([])
 
-# Read in dictionary
+# Read in dictionary from file
 f = file("dict.txt").read()
 for word in f.split():
 	wdict[len(word)].append(word)
 
 print "Read In Dictionary"
-
-# Generate every possible key of certain length
-# possibleKeys = [''.join(i) for i in itertools.product("ABCDEFGHIJKLMNOPQRSTUVWXYZ",repeat=keySize)]
-
 print ""
 
 # Starts Timer
 start_time = time.time()
 
+# Generate every possible key of certain length
 for key in itertools.product("ABCDEFGHIJKLMNOPQRSTUVWXYZ",repeat=keySize):
 	cipherNum = []
 	keyNum = []
@@ -82,6 +82,9 @@ for key in itertools.product("ABCDEFGHIJKLMNOPQRSTUVWXYZ",repeat=keySize):
 	for a in plainNum:
 		plainTxt += ndict[a]
 
+	# Compares every word of certain length in dictionary with
+	# first word of cipher text. If a match, print the plaintext
+	# and key.
 	for word in wdict[firstWordLength]:
 		if plainTxt[0:firstWordLength] == word:
 			print "Key: " + ''.join(key)
@@ -91,4 +94,5 @@ for key in itertools.product("ABCDEFGHIJKLMNOPQRSTUVWXYZ",repeat=keySize):
 
 print ""
 
+# Print runtime of the program
 print("Program took %s seconds" % (time.time() - start_time))
