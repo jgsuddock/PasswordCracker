@@ -37,11 +37,15 @@ ndict = {0: 'A', 1: 'B', 2: 'C', 3: 'D', 4: 'E', 5: 'F', 6: 'G', 7: 'H', 8: 'I',
 		10: 'K', 11: 'L', 12: 'M', 13: 'N', 14: 'O', 15: 'P', 16: 'Q', 17: 'R', 18: 'S',
 		19: 'T', 20: 'U', 21: 'V', 22: 'W', 23: 'X', 24: 'Y', 25: 'Z'};
 
-# Read in dictionary
 wdict = []
+# Initialize dictionary lists (index by length)
+for i in range(0,30):
+	wdict.append([])
+
+# Read in dictionary
 f = file("dict.txt").read()
 for word in f.split():
-    wdict.append(word)
+	wdict[len(word)].append(word)
 
 print "Read In Dictionary"
 
@@ -79,7 +83,7 @@ for key in possibleKeys:
 	for a in plainNum:
 		plainTxt += ndict[a]
 
-	for word in wdict:
+	for word in wdict[firstWordLength]:
 		if plainTxt[0:firstWordLength] == word:
 			print plainTxt
 			break
