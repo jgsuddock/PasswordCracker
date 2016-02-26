@@ -50,15 +50,14 @@ for word in f.split():
 print "Read In Dictionary"
 
 # Generate every possible key of certain length
-possibleKeys = [''.join(i) for i in itertools.product("ABCDEFGHIJKLMNOPQRSTUVWXYZ",repeat=keySize)]
+# possibleKeys = [''.join(i) for i in itertools.product("ABCDEFGHIJKLMNOPQRSTUVWXYZ",repeat=keySize)]
 
-print "Generated Keys"
 print ""
 
 # Starts Timer
 start_time = time.time()
 
-for key in possibleKeys:
+for key in itertools.product("ABCDEFGHIJKLMNOPQRSTUVWXYZ",repeat=keySize):
 	cipherNum = []
 	keyNum = []
 	plainNum = []
@@ -85,10 +84,11 @@ for key in possibleKeys:
 
 	for word in wdict[firstWordLength]:
 		if plainTxt[0:firstWordLength] == word:
-			print plainTxt
+			print "Key: " + ''.join(key)
+			print "Plain Text: " + plainTxt
+			print ""
 			break
 
-print ""
 print ""
 
 print("Program took %s seconds" % (time.time() - start_time))
