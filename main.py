@@ -45,7 +45,7 @@ def update_progress(progress, time):
     #     status = "Done...\r\n"
     block = int(round(barLength*progress))
     timestatus = str(int(time)) + " sec runtime"
-    text = "\rPercent: [{0}] {1}% {2}  {3}".format( "#"*block + "-"*(barLength-block), "{0:.2f}".format(progress*100), status, timestatus)
+    text = "\rPercent: [{0}] {1}% {2}  {3}".format( "#"*block + "-"*(barLength-block), "{0:.4f}".format(progress*100), status, timestatus)
     sys.stdout.write(text)
     sys.stdout.flush()
 
